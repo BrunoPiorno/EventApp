@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/EventApp/static/css/main.76f31944.css",
+    "main.js": "/EventApp/static/js/main.13ec6a00.js",
+    "static/js/453.8a3e1d88.chunk.js": "/EventApp/static/js/453.8a3e1d88.chunk.js",
+    "static/media/icon.jpg": "/EventApp/static/media/icon.caf12ff3a6dce75d1a7d.jpg",
+    "index.html": "/EventApp/index.html",
+    "main.76f31944.css.map": "/EventApp/static/css/main.76f31944.css.map",
+    "main.13ec6a00.js.map": "/EventApp/static/js/main.13ec6a00.js.map",
+    "453.8a3e1d88.chunk.js.map": "/EventApp/static/js/453.8a3e1d88.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.76f31944.css",
+    "static/js/main.13ec6a00.js"
+  ]
+}
