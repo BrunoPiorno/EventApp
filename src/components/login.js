@@ -1,16 +1,19 @@
 import './Login.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { useNavigate } from 'react-router-dom';
 
-function SocialLogin() {
+function SocialLogin({ setUserProfilePic }) {
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
 
   const responseGoogle = (response) => {
-    console.log(response);
-    // Aquí puedes enviar el token de acceso a tu servidor para autenticar al usuario
-    // Luego, redirige al usuario a la página de inicio
-    navigate('/home');
+    if (response.profileObj) {
+      setUserProfilePic(response.profileObj.imageUrl);
+      navigate('/home'); // Redirige al usuario a la página de inicio ("/home")
+    } else {
+      setError('No se pudo obtener la imagen de perfil del usuario.');
+    }
   };
 
   return (
@@ -23,8 +26,10 @@ function SocialLogin() {
         onFailure={responseGoogle}
         cookiePolicy={'single_host_origin'}
       />
+      {error && <p>{error}</p>}
     </div>
   );
 }
 
 export default SocialLogin;
+
