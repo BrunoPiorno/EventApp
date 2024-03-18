@@ -42,6 +42,10 @@ function PhotoGallery({ photos }) {
   return (
     <div className="gallery-container">
       <h2>Galería de Fotos</h2>
+      <div class="gallery-container__filters">
+        <button class="all-photos">Todas las fotos</button>
+        <button class="my-photos">Mis fotos</button>
+      </div>
       <div className="gallery">
         {photos.map((photo, index) => (
           <div key={index} className="photo-item" onClick={() => openModal(index)}>
