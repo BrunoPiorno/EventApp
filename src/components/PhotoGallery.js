@@ -4,6 +4,7 @@ import './modal.css';
 
 function PhotoGallery({ photos }) {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(null);
+  const [showAllPhotos, setShowAllPhotos] = useState(true); // Estado para controlar qué conjunto de fotos mostrar
 
   const openModal = (index) => {
     setSelectedPhotoIndex(index);
@@ -37,21 +38,40 @@ function PhotoGallery({ photos }) {
         return prevIndex + 1;
       }
     });
-  };  
+  };
+
+  const handleShowAllPhotos = () => {
+    setShowAllPhotos(true); // Cambiar el estado para mostrar todas las fotos
+  };
+
+  const handleShowMyPhotos = () => {
+    setShowAllPhotos(false); // Cambiar el estado para mostrar solo las fotos del usuario actual
+  };
 
   return (
     <div className="gallery-container">
       <h2>Galería de Fotos</h2>
-      <div class="gallery-container__filters">
-        <button class="all-photos">Todas las fotos</button>
-        <button class="my-photos">Mis fotos</button>
+      <div className="gallery-container__filters">
+        <button className="all-photos" onClick={handleShowAllPhotos}>Todas las fotos</button>
+        <button className="my-photos" onClick={handleShowMyPhotos}>Mis fotos</button>
       </div>
       <div className="gallery">
-        {photos.map((photo, index) => (
-          <div key={index} className="photo-item" onClick={() => openModal(index)}>
-            <img src={photo} alt={`Photo ${index}`} />
-          </div>
-        ))}
+        {showAllPhotos 
+          ? photos.map((photo, index) => (
+              <div key={index} className="photo-item" onClick={() => openModal(index)}>
+                <img src={photo} alt={`Photo ${index}`} />
+              </div>
+            ))
+          : photos.map((photo, index) => (
+              // Suponiendo que cada foto tiene un campo 'userId' que identifica al usuario que la subió
+              // y un campo 'currentUserId' que identifica al usuario actual
+              photo.userId === photo.currentUserId && (
+                <div key={index} className="photo-item" onClick={() => openModal(index)}>
+                  <img src={photo} alt={`Photo ${index}`} />
+                </div>
+              )
+            ))
+        }
       </div>
 
       {selectedPhotoIndex !== null && (
